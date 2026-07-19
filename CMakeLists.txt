@@ -9,6 +9,8 @@ project(smp-log
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
+option(SMP_LOG_BUILD_EXAMPLES "Build examples" ON)
+
 add_library(smp-log INTERFACE)
 add_library(smp::log ALIAS smp-log)
 set_target_properties(smp-log PROPERTIES EXPORT_NAME log)
@@ -56,4 +58,8 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/smp-logConfigVersion.cmake
     DESTINATION ${CMAKE_INSTALL_LIBDIR}/cmake/smp-log
 )
+
+if(SMP_LOG_BUILD_EXAMPLES)
+    add_subdirectory(examples)
+endif()
 
